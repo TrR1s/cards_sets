@@ -13,7 +13,7 @@ pub struct Card {
 
 impl Card {
     pub fn new(rank: Rank, suit: Suit) -> Card {
-        Card{ rank: rank, suit: suit }
+        Card{ rank, suit }
     }
 }
 

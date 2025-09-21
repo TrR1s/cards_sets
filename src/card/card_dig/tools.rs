@@ -1,4 +1,4 @@
-use super::super::card_analog::{Card, Rank, Suit};
+use super::super::card_analog::{Card, Rank};
 use super::CardDig16;
 ///
 /// Do  CardDig16
@@ -28,7 +28,7 @@ pub fn rank_number_to_card16(rank_number:u8) -> CardDig16{
     match rank_number {
         0..13 => {
                     let bits : u16 = 1 << rank_number;
-                    return bits as CardDig16;
+                    bits as CardDig16
                      },
         _ => panic!("Unexpected rank value! '{}'", rank_number)
     }
