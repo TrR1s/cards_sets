@@ -7,5 +7,6 @@ pub mod prelude {
     pub  use crate::card::card_analog::{Card,Suit,Rank};
     pub use crate::set_cards::{FLUSHMASK64};
     pub use  crate::set_cards::pyramid_set::{PyrSet};
+    pub use  crate::set_cards::pyramid_set::views::{PyrVew};
 
 }
