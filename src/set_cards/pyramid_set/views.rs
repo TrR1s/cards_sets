@@ -54,7 +54,7 @@ impl fmt::Display for PyrVew {
                 ind +=1;
 
                 pyr_str.push_str(curr_str);
-                pyr_str.push_str("_");
+                pyr_str.push('_');
             }
             str_vec.push(pyr_str);
 

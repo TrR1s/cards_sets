@@ -8,5 +8,5 @@ pub mod prelude {
     pub use crate::set_cards::{FLUSHMASK64};
     pub use  crate::set_cards::pyramid_set::{PyrSet};
     pub use  crate::set_cards::pyramid_set::views::{PyrVew};
-
+    pub  use  crate::set_cards::flat_set::{FlatSet};
 }
