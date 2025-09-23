@@ -1,5 +1,5 @@
 
-use std::fmt; 
+use std::fmt::{self}; 
 pub mod suit;
 pub mod rank;
 pub use self::suit::{Suit};
@@ -14,6 +14,12 @@ pub struct Card {
 impl Card {
     pub fn new(rank: Rank, suit: Suit) -> Card {
         Card{ rank, suit }
+    }
+
+    pub fn short_string(&self) -> String{
+        format!("{}{}",self.rank.short_string(),self.suit.short_string())
+
+        
     }
 }
 

@@ -1,4 +1,4 @@
-use cards_sets::prelude::*;
+use cards_sets::{prelude::*};
 
 
 #[test]
@@ -20,4 +20,22 @@ fn vec_cards_to_flat(){
 
     let flat_set = FlatSet::new_from_card_vec(&card_vec);
     print!("flat_set: {:?}", flat_set)
+}
+
+
+#[test]
+fn flat_to_vec_card(){
+    let mut card_vec:Vec<Card> = vec![];
+    card_vec.push(Card::new(Rank::Ace,Suit::Hearts));
+    card_vec.push(Card::new(Rank::King,Suit::Diamonds));
+    card_vec.push(Card::new(Rank::Queen,Suit::Hearts));
+    card_vec.push(Card::new(Rank::Jack,Suit::Hearts));
+    card_vec.push(Card::new(Rank::Ten,Suit::Hearts));
+
+    let flat_set = FlatSet::new_from_card_vec(&card_vec);
+    println!("flat_set: {:?}", flat_set);
+
+    // let new_vec = flat_set.flat_to_vec_cards();
+
+    println!("flat_set: {}", flat_set);
 }
