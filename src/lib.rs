@@ -6,7 +6,8 @@ pub mod prelude {
     pub use crate::card::card_dig::CardDig16;
     pub  use crate::card::card_analog::{Card,Suit,Rank};
     pub use crate::set_cards::{FLUSHMASK64};
-    pub use  crate::set_cards::pyramid_set::{PyrSet};
+    pub use  crate::set_cards::pyramid_set::{PyrSet,PyramidSet64};
     pub use  crate::set_cards::pyramid_set::views::{PyrVew};
-    pub  use  crate::set_cards::flat_set::{FlatSet};
+    pub  use  crate::set_cards::flat_set::{FlatSet,FlatSet64};
+    pub  use  crate::set_cards::utils::{from_flat_64_to_pyr_64};
 }

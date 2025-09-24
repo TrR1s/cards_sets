@@ -1,6 +1,6 @@
 use std::{fmt}; 
-use  crate::card::card_analog::{Rank};
-use super::PyramidSet;
+use  crate::{card::card_analog::Rank, prelude::PyrSet};
+use super::PyramidSet64;
 use crate::set_cards::FLUSHMASK64;
 
 #[derive(Debug)]
@@ -11,7 +11,7 @@ pub struct  PyrVew{
 }
 
 impl PyrVew {
-    pub fn do_frm_pyrset(&pyr_s: &PyramidSet) ->PyrVew{
+    pub fn do_frm_pyrset(&pyr_s: &PyramidSet64) ->PyrVew{
         let mut pyr_arr: [[Option<Rank>;13];4] = [[None;13];4];
         let flush_is = (FLUSHMASK64 & pyr_s)== FLUSHMASK64;
 
@@ -67,4 +67,13 @@ impl fmt::Display for PyrVew {
         write!(f,"{res_str}")
     }
     
+}
+
+
+impl fmt::Display for PyrSet {
+    fn fmt(&self, f:&mut fmt::Formatter)->fmt::Result{
+        let pyr_view = PyrVew::do_frm_pyrset(&self.pyr_bin);
+        let pyr_show = format!("{pyr_view}");
+        write!(f,"{pyr_show}")
+    }    
 }
