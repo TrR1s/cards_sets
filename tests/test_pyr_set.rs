@@ -33,6 +33,7 @@ fn it_pyr_view(){
     println!("pyr_comb {:?}",pyr_comb);
     let pyr_view = PyrVew::do_frm_pyrset(&pyr_comb.pyr_bin);
     println!("pyr_view {}",pyr_view);
-    println!("pyr_comb {:?}",pyr_comb);
+    println!("pyr_comb {}",pyr_comb);
+    
 
 }

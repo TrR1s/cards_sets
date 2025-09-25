@@ -1,3 +1,5 @@
-- [x] Для PyrView сделать дисплей.
-- [ ] FlatView
-- [ ]
+- [x]  Для PyrView сделать дисплей.
+- [x] FlatView
+- [ ] Count pyr in pyr
+- [ ] fix   pyr in pyr
+- [ ] 
