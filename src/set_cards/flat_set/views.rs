@@ -20,7 +20,7 @@ impl fmt::Display for FlatSet {
         for i in 0..4{
             let res_str_curr = card_arr_str[i].join(",");
             res_str.push_str(res_str_curr.as_str());
-            res_str.push_str("\n");
+            res_str.push('\n');
         }
 
        write!(f,"{}",res_str) 

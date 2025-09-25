@@ -47,7 +47,7 @@ let mut bin_freq:[u8;13]=[0;13];// amount cards by rank in the set
         pyramid_cb |= FLUSHMASK64;
     }
 
-    return pyramid_cb as PyramidSet64;
+    pyramid_cb as PyramidSet64
 
 
 }
