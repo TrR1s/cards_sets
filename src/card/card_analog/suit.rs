@@ -1,25 +1,25 @@
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone, Ord, PartialOrd, Hash)]
 pub enum Suit {
-    Spades,
     Hearts,
-    Diamonds,
     Clubs,
+    Diamonds,
+    Spades,
 }
 
 impl Suit {
     pub fn short_string(&self) -> &'static str {
         match *self {
-            Suit::Spades => "s",
             Suit::Hearts => "h",
-            Suit::Diamonds => "d",
             Suit::Clubs => "c",
+            Suit::Diamonds => "d",
+            Suit::Spades => "s",
         }
     }
 
     pub fn suit_vec() -> Vec<Suit>{
 
-        vec![Suit::Spades,Suit::Hearts,Suit::Diamonds,Suit::Clubs]
+        vec![Suit::Hearts,Suit::Clubs,Suit::Diamonds,Suit::Spades]
     }
 
     pub fn suit_number(&self) -> u8{
