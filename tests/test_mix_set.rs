@@ -19,7 +19,7 @@ fn mix_set_new(){
 
     println!("flat_set: {}", flat_set);
     let mix_s = MixSet::new_from_flat(flat_set.flat_bin);
-    println!("mix_s {:?}",mix_s);
+    println!("mix_s {}",mix_s);
     println!("flat_set: {}", flat_set);
 
 }

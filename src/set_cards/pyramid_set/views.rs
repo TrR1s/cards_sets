@@ -39,7 +39,7 @@ impl PyrVew {
 
 impl fmt::Display for PyrVew {
     fn fmt(&self, f:&mut fmt::Formatter)->fmt::Result{
-        let flush_set:String = if self.flush_is {"One Suit".to_string()} else {"UnSuit".to_string()} ;
+        let flush_set:String = if self.flush_is {"Flush_flag".to_string()} else {"Flush_flag_free".to_string()} ;
         
 
         let mut str_vec : Vec<String> = vec![];

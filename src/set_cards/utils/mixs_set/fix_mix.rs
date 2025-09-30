@@ -1,3 +1,4 @@
+use std::{fmt}; 
 pub use crate::prelude::{MixSet,FlatSet64,flat_check_flush};
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone, Ord, PartialOrd, Hash)]
@@ -5,6 +6,18 @@ pub enum FixSuitable {
     NOT,
     YES(u8)
     }
+
+impl fmt::Display for FixSuitable {
+    fn fmt(&self, f:&mut fmt::Formatter)->fmt::Result{
+        let suit_show = match  self {
+            FixSuitable::YES(suit_n) => format!("Cards suitable, suit n: {suit_n}"),
+            FixSuitable::NOT => format!("Cards unsuitable"),
+            
+        };
+        
+        write!(f,"\n{suit_show}")
+    }    
+}
 
 #[derive(Debug, Eq, PartialEq, Clone, Ord, PartialOrd, Hash)]
 pub struct FixMix{
@@ -26,4 +39,12 @@ impl FixMix {
 
     }
     
+}
+
+impl fmt::Display for FixMix {
+    fn fmt(&self, f:&mut fmt::Formatter)->fmt::Result{
+        let mix_show = format!("{}",self.mix_set);
+        
+        write!(f,"\nFix_mix: \n{} {}",self.suitable_info,mix_show)
+    }    
 }

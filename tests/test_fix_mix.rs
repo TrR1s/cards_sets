@@ -19,7 +19,7 @@ fn fix_mix_set_new(){
 
     println!("flat_set: {}", flat_set);
     let fix_mix = FixMix::new_from_flat(flat_set.flat_bin);
-    println!("fix_mix {:?}",fix_mix);
-    println!("flat_set: {}", flat_set);
+    println!("fix_mix {}",fix_mix);
+    // println!("flat_set: {}", flat_set);
 
 }
