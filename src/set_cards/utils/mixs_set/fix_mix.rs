@@ -21,8 +21,8 @@ impl fmt::Display for FixSuitable {
 
 #[derive(Debug, Eq, PartialEq, Clone, Ord, PartialOrd, Hash)]
 pub struct FixMix{
-    mix_set:MixSet,
-    suitable_info: FixSuitable,
+    pub mix_set:MixSet,
+    pub suitable_info: FixSuitable,
 }
 
 impl FixMix {
