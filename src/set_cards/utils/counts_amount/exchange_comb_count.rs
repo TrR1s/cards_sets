@@ -1,4 +1,4 @@
-use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, FixMix, FixSuitable, FlatSet64, MixSet, PyramidSet64, FLUSHMASK64, LOWFLOW};
+use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, FixMix, FixSuitable, FlatSet64, MixSet, PyramidSet64, LOWFLOW};
 ///
 /// # Arg
 /// * fix_cards : FixMix, cards which plr left on the hand. 
@@ -7,7 +7,7 @@ use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, Fix
 /// * comb5_unfl_pyr:PyramidSet64 unflush comb. 
 /// # Out
 ///  (i64,bool,i64)
-///  (comb5_unfl_amount,comb5_fl_exist,comb5_fl_amount )
+///  let
 /// 
 /// fn count amount of possible comb5_unfl_pyr with fix card,
 /// with deck
@@ -29,8 +29,6 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
     
 
     // 1
-    let mut comb5_unfl_amount: i64 =0;
-    let mut comb5_fl_amount: i64 =0;
     let comb5_fl_exist = LOWFLOW == comb5_unfl_pyr | LOWFLOW;
 
     if comb5_unfl_pyr != comb5_unfl_pyr | fix_cards.mix_set.pyr {
@@ -44,7 +42,7 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
 
     //3
 
-    comb5_unfl_amount = pyr_in_pyr_flush_free(pyr_diff, deck.pyr);
+    let comb5_unfl_amount = pyr_in_pyr_flush_free(pyr_diff, deck.pyr);
 
     // 4
     if !comb5_fl_exist || fix_cards.suitable_info == FixSuitable::NOT{
@@ -63,7 +61,7 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
 
     let suist_nn: [u8; 4] = [0,1,2,3];
 
-    comb5_fl_amount  = match  fix_cards.suitable_info {
+    let comb5_fl_amount  = match  fix_cards.suitable_info {
         FixSuitable::NOT => 0,
         FixSuitable::YES(suit_n) => check_flush(deck.flat,pyr_diff,suit_n),
         FixSuitable::ANY => suist_nn.iter().fold(0, |acc, x| acc + check_flush(deck.flat,pyr_diff,*x)),
