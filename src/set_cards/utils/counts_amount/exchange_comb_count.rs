@@ -37,7 +37,7 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
 
     //2
 
-    let diff = comb5_unfl_pyr & fix_cards.mix_set.pyr;
+    let diff = comb5_unfl_pyr & !fix_cards.mix_set.pyr;
     let pyr_diff = from_flat_64_to_pyr_64_wo_flush(diff);
 
     //3
