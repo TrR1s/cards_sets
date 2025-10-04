@@ -110,6 +110,7 @@ let mut bin_freq:[u8;13]=[0;13];// amount cards by rank in the set
 
 pub fn flat_check_flush(flat_64:FlatSet64) -> Option<u8>{
 
+    if flat_64 == 0{return Some(100)};
     let mut suit_mask: u64 = 0b0001_1111_1111_1111;
     let mut suit_n: u8 =0;
     while suit_mask != 0  {

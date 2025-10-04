@@ -9,5 +9,5 @@ pub mod prelude {
     pub use  crate::set_cards::pyramid_set::{PyrSet,PyramidSet64};
     pub use  crate::set_cards::pyramid_set::views::{PyrVew};
     pub  use  crate::set_cards::flat_set::{FlatSet,FlatSet64};
-    pub  use  crate::set_cards::utils::{from_flat_64_to_pyr_64,from_flat_64_to_pyr_64_wo_flush,flat_check_flush,pyr_in_pyr_flush_free,MixSet,FixMix,LOWFLOW,FIRSTRANKSMASK};
+    pub  use  crate::set_cards::utils::{from_flat_64_to_pyr_64,from_flat_64_to_pyr_64_wo_flush,flat_check_flush,pyr_in_pyr_flush_free,MixSet,FixMix,LOWFLOW,FIRSTRANKSMASK,FixSuitable};
 }

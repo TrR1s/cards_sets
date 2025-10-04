@@ -1,5 +1,7 @@
 - [x]  Для PyrView сделать дисплей.
 - [x] FlatView
-- [ ] Count pyr in pyr
-- [ ] fix   pyr in pyr
-- [ ] 
+- [x] Count pyr in pyr
+- [x] fix   pyr in pyr
+- [x] fix mix
+- [x] exchange count in: fix_mix, deck_mix,comb_pyr_unfl out: unfl_amount, flush_am
+- [ ] check exchange count
