@@ -6,6 +6,6 @@ pub use  mixs_set::mix_set::MixSet;
 pub use  mixs_set::fix_mix::{FixMix,FixSuitable};
 
 pub mod counts_amount;
-pub use counts_amount::{pyr_in_pyr_flush_free,LOWFLOW,FIRSTRANKSMASK,exchange_comb_count::exchange_comb_count};
+pub use counts_amount::{pyr_in_pyr_flush_free,LOWFLOW,FIRSTRANKSMASK,exchange_comb_count::exchange_comb_count,FlushInfo};
 // pub mod exchange_count;
 
