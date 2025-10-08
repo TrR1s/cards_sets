@@ -1,4 +1,23 @@
 use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, FixMix, FixSuitable, FlatSet64, MixSet, PyramidSet64,  LOWFLOW};
+
+
+
+
+#[derive(Debug)]
+pub struct FlushInfo{
+    pub comb_fl_is:bool,
+    pub amount:i64,
+    pub fl_flat: FlatSet64,
+}
+
+#[derive(Debug)]
+pub struct VirtCards{
+    virt_pyr:PyramidSet64,
+    virt_flush_except_flat: FlatSet64,
+}
+
+
+
 ///
 /// # Arg
 /// * fix_cards : FixMix, cards which plr left on the hand. 
@@ -12,17 +31,8 @@ use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, Fix
 /// fn count amount of possible comb5_unfl_pyr with fix card,
 /// with deck
 /// 
-/// 
-/// 
-/// 
-#[derive(Debug)]
-pub struct FlushInfo{
-    pub comb_fl_is:bool,
-    pub amount:i64,
-    pub fl_flat: FlatSet64,
-}
 
-pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:PyramidSet64) -> (i64,FlushInfo){
+pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:PyramidSet64) -> (i64,FlushInfo,VirtCards ){
     
     /*
     1. проверяем есть ли fix_cards в comb5_unfl_pyr, если нет, то проверяшь comb5_fl_exist и возращаем 0 0
@@ -38,37 +48,46 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
     let comb5_fl_exist = LOWFLOW == comb5_unfl_pyr | LOWFLOW;
 
 
-
+    //  no fix cards in comb5
+    // return zeroes
     if comb5_unfl_pyr != comb5_unfl_pyr | fix_cards.mix_set.pyr {
         return (0 as i64,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
                                     amount:0,
                                     fl_flat:0
                                                 }
+                                                , VirtCards{virt_pyr:0,virt_flush_except_flat:0}
                                             );
     };
 
     //2
+    //fix cards in comb5
 
     let diff = comb5_unfl_pyr & !fix_cards.mix_set.pyr;
     let pyr_diff = from_flat_64_to_pyr_64_wo_flush(diff);
 
     //3
-
+    // count total amount comb5
     let comb5_unfl_amount = pyr_in_pyr_flush_free(pyr_diff, deck.pyr);
 
     // 4
+    // если флеш не возможен. 
+    // либо с данными фиксировными картами.
+    // либо у comb5 нет comb5_fl
     if !comb5_fl_exist || fix_cards.suitable_info == FixSuitable::NOT{
 
         return (comb5_unfl_amount,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
                                     amount:0,
                                     fl_flat:0
-                                                });
+                                                }, VirtCards{virt_pyr:pyr_diff,virt_flush_except_flat:0});
         
     }
 
     // 5
+    // Флешы есть
+
+    // проверка флеша у одной масти.
     let check_flush= |flat64:FlatSet64,pyr_fl_64:PyramidSet64, suit_n:u8| -> (i64,FlatSet64) {
         
         let flush_n_64 = pyr_fl_64 << 16*suit_n;
@@ -78,7 +97,8 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
         (0,0) 
     };
 
-
+    // загвоздка в случае обмена 5-ти карт, т.е. когда нет фиксированных карт.
+    // в данном случае, проходимся по всем мастям
     let (comb5_fl_amount,fl_flat)  = match  fix_cards.suitable_info {
         FixSuitable::NOT => (0,0),
         FixSuitable::YES(suit_n) => check_flush(deck.flat,pyr_diff,suit_n),
@@ -102,7 +122,11 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
     (comb5_unfl_amount-comb5_fl_amount,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
                                     amount:comb5_fl_amount,
-                                    fl_flat:fl_flat})
+                                    fl_flat:fl_flat},
+                                 VirtCards{
+                                    virt_pyr:pyr_diff,
+                                    virt_flush_except_flat:fl_flat
+                                })
     
     
 }
