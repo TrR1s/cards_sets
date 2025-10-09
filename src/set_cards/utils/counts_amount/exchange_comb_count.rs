@@ -12,8 +12,9 @@ pub struct FlushInfo{
 
 #[derive(Debug)]
 pub struct VirtCards{
-    virt_pyr:PyramidSet64,
-    virt_flush_except_flat: FlatSet64,
+    pub virt_pyr:PyramidSet64,
+    pub virt_flush_except_flat: FlatSet64,
+    pub fl_except_amount: i64
 }
 
 
@@ -56,7 +57,7 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
                                     amount:0,
                                     fl_flat:0
                                                 }
-                                                , VirtCards{virt_pyr:0,virt_flush_except_flat:0}
+                                                , VirtCards{virt_pyr:0,virt_flush_except_flat:0,fl_except_amount:0}
                                             );
     };
 
@@ -80,7 +81,7 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
                                     comb_fl_is:comb5_fl_exist,
                                     amount:0,
                                     fl_flat:0
-                                                }, VirtCards{virt_pyr:pyr_diff,virt_flush_except_flat:0});
+                                                }, VirtCards{virt_pyr:pyr_diff,virt_flush_except_flat:0,fl_except_amount:0});
         
     }
 
@@ -125,7 +126,8 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
                                     fl_flat:fl_flat},
                                  VirtCards{
                                     virt_pyr:pyr_diff,
-                                    virt_flush_except_flat:fl_flat
+                                    virt_flush_except_flat:fl_flat,
+                                    fl_except_amount:comb5_fl_amount
                                 })
     
     

@@ -24,7 +24,7 @@ fn echange_count_1(){
     comb_vec.push(rank_number_to_card16(Rank::King.rank_number()));
     comb_vec.push(rank_number_to_card16(Rank::Ten.rank_number()));
     comb_vec.push(rank_number_to_card16(Rank::Two.rank_number()));
-    comb_vec.push(rank_number_to_card16(Rank::Two.rank_number()));
+    comb_vec.push(rank_number_to_card16(Rank::Three.rank_number()));
     let pyr_comb = PyrSet::new_from_vec(&comb_vec, false);
     println!("pyr_comb {}",pyr_comb);
     let (comb5_unfl_amount,comb5_fl_info, virt_cards)  = exchange_comb_count(&fix_cards,&deck_mix,pyr_comb.pyr_bin);
