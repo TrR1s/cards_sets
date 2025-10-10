@@ -6,15 +6,15 @@ use crate::prelude::{from_flat_64_to_pyr_64_wo_flush, pyr_in_pyr_flush_free, Fix
 #[derive(Debug)]
 pub struct FlushInfo{
     pub comb_fl_is:bool,
-    pub amount:i64,
+    pub amount:f64,
     pub fl_flat: FlatSet64,
 }
 
 #[derive(Debug)]
 pub struct VirtCards{
-    pub virt_pyr:PyramidSet64,
-    pub virt_flush_except_flat: FlatSet64,
-    pub fl_except_amount: i64
+    pub pyr:PyramidSet64,
+    pub flush_except_flat: FlatSet64,
+    pub fl_except_amount: f64
 }
 
 
@@ -54,10 +54,10 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
     if comb5_unfl_pyr != comb5_unfl_pyr | fix_cards.mix_set.pyr {
         return (0 as i64,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
-                                    amount:0,
+                                    amount:0.,
                                     fl_flat:0
                                                 }
-                                                , VirtCards{virt_pyr:0,virt_flush_except_flat:0,fl_except_amount:0}
+                                                , VirtCards{pyr:0,flush_except_flat:0,fl_except_amount:0.}
                                             );
     };
 
@@ -79,9 +79,9 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
 
         return (comb5_unfl_amount,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
-                                    amount:0,
+                                    amount:0.,
                                     fl_flat:0
-                                                }, VirtCards{virt_pyr:pyr_diff,virt_flush_except_flat:0,fl_except_amount:0});
+                                                }, VirtCards{pyr:pyr_diff,flush_except_flat:0,fl_except_amount:0.});
         
     }
 
@@ -100,6 +100,9 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
 
     // загвоздка в случае обмена 5-ти карт, т.е. когда нет фиксированных карт.
     // в данном случае, проходимся по всем мастям
+
+
+    
     let (comb5_fl_amount,fl_flat)  = match  fix_cards.suitable_info {
         FixSuitable::NOT => (0,0),
         FixSuitable::YES(suit_n) => check_flush(deck.flat,pyr_diff,suit_n),
@@ -114,20 +117,20 @@ pub fn exchange_comb_count(fix_cards:&FixMix,deck:&MixSet,comb5_unfl_pyr:Pyramid
                 }
                 (fl_amount,fl_flat)
 
-    }
+                            }
         
         
-    };
+                };
 
 
     (comb5_unfl_amount-comb5_fl_amount,FlushInfo{
                                     comb_fl_is:comb5_fl_exist,
-                                    amount:comb5_fl_amount,
+                                    amount:comb5_fl_amount as f64,
                                     fl_flat:fl_flat},
                                  VirtCards{
-                                    virt_pyr:pyr_diff,
-                                    virt_flush_except_flat:fl_flat,
-                                    fl_except_amount:comb5_fl_amount
+                                    pyr:pyr_diff,
+                                    flush_except_flat:fl_flat,
+                                    fl_except_amount:comb5_fl_amount as f64
                                 })
     
     
